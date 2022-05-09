@@ -1,0 +1,147 @@
+#-------------------------------------------------------
+#--------------------ROS node params-------------------- 
+# controlling the  velocity publisher stare (ON: True of OFF: false)
+publish_cmd_vel: true
+# controls publishing linear velocity (used fro debug and setting angular PID params)
+publish_linear_vel: true
+#-------------------------------------------------------
+#---------------------Runtime params-------------------- 
+# Maxixmum number of rows to follow
+max_row_num: 3000
+# Frame rate of ROs node = Fps 
+fps: 15
+#-------------------------------------------------------
+#-------------------Application modes-------------------
+# The mode which is used for tuning the mask (no velocity will be published)
+# 用于测试图像检测部分是否工作正确
+mask_tune: false
+# In case of having only one camera set this param to true (the front camera will be used)
+single_camera_mode: false
+#-------------------------------------------------------
+#----------------Image ans Mask params------------------ 
+# Camera used for mask tuninig 1: front, 2: rear
+maskTuneCamera: 1
+# Scale of the image processed (it resizes the input images before process) between 0.0 ~ 1.0
+Scale: 1.0
+# Min and Max of Hue Channel
+# max_Hue: 80
+# min_Hue: 40
+max_Hue: 255
+min_Hue: 35
+# Min and Max of Saturation Channel
+# max_Saturation: 255
+# min_Saturation: 50
+max_Saturation: 255
+min_Saturation: 43
+# Min and Max of Value Channel
+# max_Value: 150
+# min_value: 100
+max_Value: 255
+min_value: 46
+#-------------------------------------------------------
+#------------------Feature space------------------------ 
+# min radius of contour which will be detected and contribute on detecting line 
+minContourSize: 0.2
+# ???
+LineFitting_method: 1 
+# -------------------------------------------------------
+#---------------------- Neighbourhood---------------------
+# Size of input image should be set here 
+width: 640
+height: 480
+# default position of tracking windows 
+ex_Xc: 320
+ex_Yc: 240
+# default size of tracking windows
+nh_L: 100
+# nh_H: 350
+nh_H: 460
+# ???
+nh_offset: 200
+# min point where sate controller will switch the mode inside the tracking windows
+# min_points_switch: 100
+min_points_switch: 3
+# min point where sate controller will switch the mode inside image
+# min_frame: 20
+min_frame: 30
+# ???
+coef: 55
+#-------------------------------------------------------
+#--------------------- Velocity Topic ------------------ 
+# desired forward linear velocity
+# vf_des: 0.1
+vf_des: 0.15
+# desired backward linear velocity
+vb_des: 0.15
+# Max angular velocity
+# w_max: 0.15
+w_max: 0.13
+# Min angular velocity 
+w_min: 0.00
+# ???
+z_min: 0.01
+# -------------------------------------------------------
+#---------------------- Controller ----------------------
+# position of camera w.r.t local origin
+ty: 0.5
+# height of camera from ground
+tz: 1.4
+# tilt angle of front camera
+rho_b: -75.0
+# tilt angle of rear camera
+rho_f: -75.0
+# -------------------------------------------------------
+#---------------------- Gains --------------------------- 
+# Gains of controll set for husky-clear path platform
+# gains for mode 1
+lambda_x_1: 10
+lambda_w_1: 1
+# gains for mode 2
+lambda_x_2: 0
+lambda_w_2: 500
+# gains for mode 3
+lambda_x_3: 10
+lambda_w_3: 1
+# gains for mode 4
+lambda_x_4: 0
+lambda_w_4: 500
+# -------------------------------------------------------
+#---------------------- States to start ----------------- 
+# uncomment each of these states and controller will start from that state to drive robot
+# camera_ID: 1 -> front Camera, camera_ID: 2 -> Rear Camera
+# drive_forward: true -> moving forward, drive_forward: false -> moving backward
+# turning_mode: based on the mode (state machine) is the robot is state of turning or not
+# steering_dir: 1 -> normal, steering_dir: -1 -> inverse (based on robots local coordinate system) 
+# driving_dir: 1 -> moving forward, driving_dir: 2 moving backward
+# 用于设置初始模式
+# 可用于分场景直接测试各个模式
+
+mode: 1
+camera_ID: 1
+drive_forward: true
+turning_mode: false
+steering_dir: 1
+driving_dir: 1
+
+# mode: 2
+# camera_ID: 2
+# drive_forward: false
+# turning_mode: true
+# steering_dir: -1
+# driving_dir: 1
+
+# mode: 3
+# camera_ID: 2
+# drive_forward: true
+# turning_mode: false
+# steering_dir: -1
+# driving_dir: -1
+
+# mode: 4
+# camera_ID: 1
+# drive_forward: false
+# turning_mode: true
+# steering_dir: 1
+# driving_dir: -1
+
+

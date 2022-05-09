@@ -1,0 +1,30 @@
+<!-- -->
+<launch>
+  <!--gazebo simulation-->
+  <include file="$(find scout_gazebo_sim)/launch/scout_test_world.launch" />
+
+  <!--pub odom data -->
+  <include file="$(find scout_base)/launch/scout_base_sim.launch" />
+
+  <!--publish odom_combined data-->
+  <include file="$(find scout_bringup)/launch/scout_ekf_no_tf.launch" />
+
+  <!--load map file-->
+  <include file="$(find scout_ndt_localizer)/launch/map_loader.launch" />
+
+  <!--points downsample-->
+  <include file="$(find scout_ndt_localizer)/launch/points_downsample.launch" />
+
+  <!--NDT Matching-->
+  <include file="$(find scout_ndt_localizer)/launch/ndt_matching.launch" />
+
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" ns="base_link" >
+        <param name="/target_frame_name" value="map" />
+        <param name="/source_frame_name" value="base_link" />
+        <param name="/trajectory_update_rate" value="10.0" />
+        <param name="/trajectory_publish_rate" value="10.0" />
+    </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find scout_ndt_localizer)/config/ndt.rviz" />
+
+</launch>

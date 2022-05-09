@@ -1,0 +1,5 @@
+<!-- -->
+<launch>
+  <!-- Point Cloud -->
+  <node pkg="points_map_loader" type="points_map_loader" name="points_map_loader" args="noupdate $(find points_map_loader)/maps/crop0.pcd"/>
+</launch>

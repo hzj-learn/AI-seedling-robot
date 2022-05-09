@@ -1,0 +1,6 @@
+<launch>
+    <node name="teleop_keybord" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
+        <remap from="/cmd_vel" to="/cmd_vel/input"/>
+    </node>
+    <include file="$(find base_velocity_smoother)/launch/base_velocity_smoother.launch" />
+</launch>

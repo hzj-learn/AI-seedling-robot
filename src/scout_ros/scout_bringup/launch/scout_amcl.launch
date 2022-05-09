@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find scout_bringup)/map/crop.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+<node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <remap from="scan" to="/scan"/>
+    <param name="odom_frame_id" value="odom_combined"/>
+    <param name="odom_model_type" value="diff"/>
+    <param name="base_frame_id" value="base_footprint"/>
+    <param name="global_frame_id" value="map"/>
+    
+    <!--transform tolerance-->
+    <param name="transform_tolerance" value="0.1"/>
+    
+    <!--overall filter-->
+    <param name="min_particles" value="100"/>
+    <param name="max_particles" value="800"/>
+    <param name="initial_pose_x" value="0.0"/>
+    <param name="initial_pose_y" value="0.0"/>
+    <param name="updata_min_a" value="0.01"/>
+    <param name="update_min_d" value="0.01"/>
+    
+    <!--likelihood_field of laser-->
+    <param name="laser_min_range" value="0.0"/>
+    <param name="laser_max_range" value="28"/>
+    <param name="laser_max_beams" value="30"/>
+    <param name="laser_z_hit" value="0.95"/>
+    <param name="laser_z_rand" value="0.05"/>
+    
+    <!--Odometry-->
+    <param name="odom_model_type" value="diff"/>
+    <param name="odom_alpha1" value="0.2"/>
+    <param name="odom_alpha2" value="0.2"/>
+    <param name="odom_alpha3" value="0.2"/>
+    <param name="odom_alpha4" value="0.2"/>
+    
+  </node>
+</launch>

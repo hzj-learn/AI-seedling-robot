@@ -1,0 +1,7 @@
+<!-- -->
+<launch>
+  <!-- rosrun lidar_localizer ndt_mapping  -->
+  <node pkg="scout_ndt_localizer" type="ndt_mapping" name="ndt_mapping" output="screen">
+  </node>
+
+</launch>

@@ -1,0 +1,18 @@
+<launch>
+    <include file="$(find scout_gazebo_sim)/launch/scout_test_world.launch" />
+    <include file="$(find scout_base)/launch/scout_base_sim.launch" />
+    <include file="$(find fake_localization)/launch/fake_localization.launch" />
+    <!--include file="$(find scout_bringup)/launch/scout_gps_fusion.launch" /-->
+    <include file="$(find scout_bringup)/launch/scout_ekf.launch" />
+    <include file="$(find pointcloud_to_laserscan)/launch/point2laser.launch" />
+
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" ns="base_link" >
+        <param name="/target_frame_name" value="map" />
+        <param name="/source_frame_name" value="base_link" />
+        <param name="/trajectory_update_rate" value="10.0" />
+        <param name="/trajectory_publish_rate" value="10.0" />
+    </node>
+
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find scout_description)/rviz/navigation.rviz" />
+</launch>
